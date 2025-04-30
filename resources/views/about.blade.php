@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="color: red">Hello, This is about page.</h1>
+    <p>{{ $title }}</p>
+    <a href="{{ url('/') }}">برو به صفحه اصلی</a>
+
+    <form action="{{ url('/contact') }}" method="post"></form>
+    <form action="{{ url('/another') }}" method="post"></form>
+</body>
+</html>
