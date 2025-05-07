@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,25 +12,40 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        //select * from categories
-        //select id,name from categories
-        $categories = DB::table('categories')->get(['id', 'name']);
+        $categories = Category::all();
+//        $categories = Category::query()
+//            ->where('status', 1)
+//            ->whereDate('created_at', '>', now()->addDay(2))
+//              ->orderBy('id', 'desc')
+//            ->get();
 
-        //condition
-        $categories2 = DB::table('categories')
-            ->where('id', '>', 2)
-            ->get(['id', 'name']);
+        return view('admin.category.index', compact('categories'));
+    }
 
-        $categories2 = DB::table('categories')
-            ->where('id', 2)
-            ->update([
-                'status' => false
-            ]);
+    public function show(string $id)
+    {
+        $category = Category::query()->find($id);
+        //$category = Category::query()->findOrFail($id);
+        //$category = Category::query()->orderBy('id', 'desc')->first();
 
-        $deleted = DB::table('categories')
-            ->where('status', 0)
-            ->delete();
+        dd($category);
+    }
 
-        dd($deleted);
+    public function create()
+    {
+        $category = new Category();
+        $category->name = 'fdhashfdah';
+        $category->save();
+
+        Category::query()->create([
+            'name' => 'fdhashfdah'
+        ]);
+    }
+
+    public function destroy(string $id)
+    {
+        $category = Category::query()->find($id);
+        $category->delete();
+
     }
 }

@@ -14,4 +14,5 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('category.show');
 });
