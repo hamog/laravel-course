@@ -21,7 +21,7 @@
                             <div class="col">
                                <div class="form-group">
                                    <label for="name">نام دسته بندی</label>
-                                   <input type="text" id="name" name="name" class="form-control" value="" required>
+                                   <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" required>
                                </div>
                             </div>
                             <div class="col">

@@ -39,21 +39,29 @@
                                         <a class="btn btn-warning btn-sm" href="{{ route('admin.categories.edit', $category->id) }}" role="button">
                                             ویرایش
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href="{{ route('admin.categories.destroy', $category->id) }}" role="button">
+                                        <button class="btn btn-danger btn-sm" type="button" onclick="confirmDelete('delete-{{ $category->id }}')">
                                             حذف
-                                        </a>
+                                        </button>
+                                        <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post" id="delete-{{ $category->id }}">
+                                            @csrf
+                                            @method('delete')
+
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-
+                    {{ $categories->links() }}
                 </div>
             </div>
             <!-- /.card -->
         </div>
     </div>
 @endsection
+

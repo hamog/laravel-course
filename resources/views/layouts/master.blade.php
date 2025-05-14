@@ -44,6 +44,7 @@
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('css/adminlte.rtl.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
+    @yield('styles')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -82,6 +83,7 @@
             <div class="container-fluid">
 
                 @include('includes._notifications')
+                @include('includes._errors')
 
                 @yield('content')
             </div>
@@ -116,6 +118,8 @@
 <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
 <script src="{{ asset('js/adminlte.js') }}"></script>
 <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+<script src="{{ asset('js/sweetalert2.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
     const Default = {
@@ -136,6 +140,9 @@
         }
     });
 </script>
+
+@yield('scripts')
+
 <!--end::OverlayScrollbars Configure-->
 <!--end::Script-->
 </body>
