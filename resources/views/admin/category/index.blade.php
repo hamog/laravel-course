@@ -3,32 +3,57 @@
 @section('title', 'لیست دسته بندی ها')
 
 @section('content')
-    <!--begin::App Content Header-->
-    <div class="app-content-header">
-        <!--begin::Container-->
-        <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-                <div class="col-sm-6"><h3 class="mb-0">لیست دسته بندی ها</h3></div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">لیست دسته بندی ها</h3>
+                    <a href="{{ route('admin.categories.create') }}" class="btn btn-primary float-end">ثبت دسته بندی جدید</a>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>نام دسته بندی</th>
+                            <th>وضعیت</th>
+                            <th>تاریخ ثبت</th>
+                            <th>عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($categories as $category)
+                                <tr class="align-middle">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>
+                                        @if($category->status)
+                                            <span class="badge text-bg-success">فعال</span>
+                                        @else
+                                            <span class="badge text-bg-danger">غیرفعال</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $category->created_at->format('Y/m/d H:i') }}</td>
+                                    <td>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.categories.edit', $category->id) }}" role="button">
+                                            ویرایش
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="{{ route('admin.categories.destroy', $category->id) }}" role="button">
+                                            حذف
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+
                 </div>
             </div>
-            <!--end::Row-->
+            <!-- /.card -->
         </div>
-        <!--end::Container-->
     </div>
-    <!--end::App Content Header-->
-    <!--begin::App Content-->
-    <div class="app-content">
-        <!--begin::Container-->
-        <div class="container-fluid">
-
-        {!! dump($categories) !!}
-        <!--end::Container-->
-    </div>
-    <!--end::App Content-->
 @endsection

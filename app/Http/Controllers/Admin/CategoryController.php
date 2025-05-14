@@ -12,34 +12,48 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-//        $categories = Category::query()
-//            ->where('status', 1)
-//            ->whereDate('created_at', '>', now()->addDay(2))
-//              ->orderBy('id', 'desc')
-//            ->get();
+        $categories = Category::query()->orderBy('id', 'desc')->get();
 
         return view('admin.category.index', compact('categories'));
     }
 
-    public function show(string $id)
-    {
-        $category = Category::query()->find($id);
-        //$category = Category::query()->findOrFail($id);
-        //$category = Category::query()->orderBy('id', 'desc')->first();
-
-        dd($category);
-    }
-
     public function create()
     {
-        $category = new Category();
-        $category->name = 'fdhashfdah';
-        $category->save();
+        return view('admin.category.create');
+    }
+
+    public function store(Request $request)
+    {
+//        request('name');
+//        Request::input('name');
 
         Category::query()->create([
-            'name' => 'fdhashfdah'
+            'name' => $request->input('name'),
+            'status' => $request->has('status')
         ]);
+
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'دسته بندی با موفقیت ثبت شد.');
+    }
+
+    public function edit(string $id)
+    {
+        $category = Category::query()->find($id);
+
+        return view('admin.category.edit', compact('category'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $category = Category::query()->find($id);
+
+        $category->update([
+            'name' => $request->input('name'),
+            'status' => $request->has('status')
+        ]);
+
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'دسته بندی با موفقیت به روزرسانی شد.');
     }
 
     public function destroy(string $id)
@@ -47,5 +61,7 @@ class CategoryController extends Controller
         $category = Category::query()->find($id);
         $category->delete();
 
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'دسته بندی با موفقیت حذف شد.');
     }
 }
