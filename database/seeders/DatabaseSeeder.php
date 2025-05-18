@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
 //            UserSeeder::class
-            CategorySeeder::class
+            CategorySeeder::class,
+            TagSeeder::class
         ]);
 
 //        DB::table('categories')->insert([

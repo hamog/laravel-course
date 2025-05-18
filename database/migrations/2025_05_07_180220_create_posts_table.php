@@ -11,8 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(']', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->string('title')->unique();
+            $table->text('body');
+            $table->string('image')->nullable();
+            $table->integer('views_count')->default(0);
+            $table->date('published_at')->nullable();
+//            $table->enum('status', ['draft', 'published', 'unpublished']);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
