@@ -40,6 +40,12 @@
                         <p>دسته بندی ها</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.posts.index')  }}" class="nav-link">
+                        <i class="nav-icon bi bi-book"></i>
+                        <p>اخبار</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
