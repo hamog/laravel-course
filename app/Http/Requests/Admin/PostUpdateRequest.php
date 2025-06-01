@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostUpdateRequest extends FormRequest
 {
@@ -22,11 +23,18 @@ class PostUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255|unique:posts',
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('posts')->ignore($this->route('post'))
+            ],
             'body' => 'required|string|max:65000',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'status' => 'required|boolean',
-            'published_at' => 'nullable|date|date_format:Y/m/d'
+            'published_at' => 'nullable|date|date_format:Y/n/j',
+            'tags' => 'nullable|array',
+            'tags.*' => 'required|integer|min:1|exists:tags,id',
         ];
     }
 }

@@ -26,7 +26,9 @@ class PostStoreRequest extends FormRequest
             'body' => 'required|string|max:65000',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'status' => 'required|boolean',
-            'published_at' => 'nullable|date|date_format:Y/m/d'
+            'published_at' => 'nullable|date|date_format:Y/n/j',
+            'tags' => 'nullable|array',
+            'tags.*' => 'required|integer|min:1|exists:tags,id',
         ];
     }
 }

@@ -20,11 +20,15 @@ class Post extends Model
         'published_at'
     ];
 
+    protected $casts = [
+        'published_at' => 'date'
+    ];
+
     //custom
 
-    public function getImage(): ?string
+    public function getImage(): string
     {
-        return $this->image ? Storage::disk('public')->url($this->image) : null;
+        return $this->image ? Storage::disk('public')->url($this->image) : asset('assets/img/prod-1.jpg');
     }
 
     //Relationships

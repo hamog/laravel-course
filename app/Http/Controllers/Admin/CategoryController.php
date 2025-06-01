@@ -15,7 +15,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::query()->orderBy('id', 'desc')->paginate(20);
+        $categories = Category::query()->orderBy('id', 'desc')->take(2)->get();
+        //$categories->append(['test']);
+        foreach ($categories as $category) {
+            dd($category->title);
+        }
 
         return view('admin.category.index', compact('categories'));
     }

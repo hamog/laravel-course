@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\PostStoreRequest;
 use App\Http\Requests\Admin\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,8 +25,11 @@ class PostController extends Controller
         $categories = Category::query()
             ->orderBy('name')
             ->pluck('name', 'id');
+        $tags = Tag::query()
+            ->orderBy('name')
+            ->pluck('name', 'id');
 
-        return view('admin.post.create', compact('categories'));
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -50,6 +54,12 @@ class PostController extends Controller
             'published_at' => $request->input('published_at')
         ]);
 
+        if ($request->input('tags')) {
+            foreach ($request->input('tags') as $tagId) {
+                $post->tags()->attach($tagId);
+            }
+        }
+
         return redirect()->route('admin.posts.index')
             ->with('success', 'خبر با موفقیت ثبت شد.');
     }
@@ -59,7 +69,9 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::query()->findOrFail($id);
+
+        return view('admin.post.show', compact('post'));
     }
 
     /**
@@ -70,9 +82,12 @@ class PostController extends Controller
         $categories = Category::query()
             ->orderBy('name')
             ->pluck('name', 'id');
+        $tags = Tag::query()
+            ->orderBy('name')
+            ->pluck('name', 'id');
         $post = Post::query()->findOrFail($id);
 
-        return view('admin.post.edit', compact('categories', 'post'));
+        return view('admin.post.edit', compact('categories', 'post', 'tags'));
     }
 
     /**
@@ -100,6 +115,10 @@ class PostController extends Controller
             'status' => $request->has('status'),
             'published_at' => $request->input('published_at')
         ]);
+
+        if ($request->input('tags')) {
+            $post->tags()->sync($request->input('tags'));
+        }
 
         return redirect()->route('admin.posts.index')
             ->with('success', 'خبر با موفقیت به روزرسانی شد.');

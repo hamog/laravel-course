@@ -15,24 +15,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-//            UserSeeder::class
+            UserSeeder::class,
             CategorySeeder::class,
             TagSeeder::class
         ]);
 
-//        DB::table('categories')->insert([
-//            [
-//                'name' => 'ورزشی',
-//                'created_at' => now(),
-//                'updated_at' => now(),
-//                'status' => 1
-//            ],
-//            [
-//                'name' => 'سیاسی',
-//                'created_at' => now(),
-//                'updated_at' => now(),
-//                'status' => 1
-//            ]
-//        ]);
+        DB::table('categories')->insert([
+            [
+                'name' => 'ورزشی',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'status' => 1
+            ],
+            [
+                'name' => 'سیاسی',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'status' => 1
+            ]
+        ]);
     }
 }

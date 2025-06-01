@@ -49,6 +49,19 @@
                         </div>
 
                         <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="tags">برچسب ها</label>
+                                    <select name="tags[]" id="tags" class="form-control" multiple>
+                                        @foreach($tags as $id => $name)
+                                            <option value="{{ $id }}" @selected($post->tags->contains($id))>{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="title">تصویر</label>
@@ -58,7 +71,7 @@
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="title">تاریخ انتشار</label>
-                                    <input type="date" name="published_at" id="published_at" class="form-control" value="{{ old('published_at') }}">
+                                    <input type="text" name="published_at" id="published_at" class="form-control" value="{{ old('published_at', $post->published_at->format('Y/n/j')) }}">
                                 </div>
                             </div>
                             <div class="col-3">
@@ -83,4 +96,13 @@
             <!-- /.card -->
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $("#published_at").persianDatepicker({
+            showGregorianDate: true,
+            {{--selectedDate: '{{ $post->published_at->format('Y/n/j') }}'--}}
+        });
+    </script>
 @endsection

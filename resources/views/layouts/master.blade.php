@@ -43,6 +43,7 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('css/adminlte.rtl.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/persian-datepicker/css/persianDatepicker-default.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
     @yield('styles')
 </head>
@@ -119,6 +120,9 @@
 <script src="{{ asset('js/adminlte.js') }}"></script>
 <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
 <script src="{{ asset('js/sweetalert2.js') }}"></script>
+<script src="{{ asset('assets/plugins/persian-datepicker/js/jquery-1.10.1.min.js') }}" ></script>
+<script src="{{ asset('assets/plugins/persian-datepicker/js/persianDatepicker.min.js') }}"></script>
+
 <script src="{{ asset('js/main.js') }}"></script>
 <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';

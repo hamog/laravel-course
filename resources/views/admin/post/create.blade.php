@@ -47,16 +47,29 @@
                         </div>
 
                         <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="tags">برچسب ها</label>
+                                    <select name="tags[]" id="tags" class="form-control" multiple>
+                                        @foreach($tags as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="title">تصویر</label>
+                                    <label for="image">تصویر</label>
                                     <input type="file" name="image" class="form-control">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="title">تاریخ انتشار</label>
-                                    <input type="date" name="published_at" id="published_at" class="form-control" value="{{ old('published_at') }}">
+                                    <input type="text" name="published_at" id="published_at" class="form-control" value="{{ old('published_at') }}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-3">
@@ -81,4 +94,12 @@
             <!-- /.card -->
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $("#published_at").persianDatepicker({
+            showGregorianDate: true,
+        });
+    </script>
 @endsection

@@ -46,8 +46,11 @@
                                             <span class="badge text-bg-danger">غیرفعال</span>
                                         @endif
                                     </td>
-                                    <td>{{ $post->created_at->format('Y/m/d H:i') }}</td>
+                                    <td>{{ verta($post->created_at)->format('Y/m/d H:i') }}</td>
                                     <td>
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.posts.show', $post->id) }}" role="button">
+                                            نمایش
+                                        </a>
                                         <a class="btn btn-warning btn-sm" href="{{ route('admin.posts.edit', $post->id) }}" role="button">
                                             ویرایش
                                         </a>
