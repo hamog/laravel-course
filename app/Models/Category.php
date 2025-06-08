@@ -25,15 +25,15 @@ class Category extends Model
         'status'
     ];
 
-    protected $hidden = [
-        'title'
-    ];
+//    protected $hidden = [
+//        'title'
+//    ];
 
     protected function title(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $value ?: 'test title',
-            set: fn () => 'test'
+            get: fn (?string $value) => $value  ?: 'test title',
+            set: fn (?string $value) => 'test'
         );
     }
 }

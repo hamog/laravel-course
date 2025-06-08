@@ -27,7 +27,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="category_id">دسته بندی</label>
-                                    <select name="category_id" id="category_id" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-control" required>
                                         <option value="">یک دسته بندی را انتخاب کنید</option>
                                         @foreach($categories as $id => $name)
                                             <option value="{{ $id }}" @selected(old('category_id') == $id)>{{ $name }}</option>

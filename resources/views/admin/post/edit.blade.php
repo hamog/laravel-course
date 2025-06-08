@@ -71,7 +71,7 @@
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="title">تاریخ انتشار</label>
-                                    <input type="text" name="published_at" id="published_at" class="form-control" value="{{ old('published_at', $post->published_at->format('Y/n/j')) }}">
+                                    <input type="text" name="published_at" id="published_at" class="form-control" value="{{ old('published_at', $post->published_at ? $post->published_at->format('Y/n/j') : '') }}">
                                 </div>
                             </div>
                             <div class="col-3">
