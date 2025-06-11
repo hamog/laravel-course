@@ -11,6 +11,8 @@ use App\Models\Post;
 use App\Models\Tag;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -36,12 +38,16 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::query()
-            ->orderBy('name')
-            ->pluck('name', 'id');
-        $tags = Tag::query()
-            ->orderBy('name')
-            ->pluck('name', 'id');
+        $categories = Cache::rememberForever('categories', function () {
+            return Category::query()
+                ->orderBy('name')
+                ->pluck('name', 'id');
+        });
+        $tags = Cache::rememberForever('tags', function () {
+            return  Tag::query()
+                ->orderBy('name')
+                ->pluck('name', 'id');
+        });
 
         return view('admin.post.create', compact('categories', 'tags'));
     }

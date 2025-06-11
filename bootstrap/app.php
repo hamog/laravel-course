@@ -21,4 +21,5 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             return response()->view('errors.404', status: 404);
         });
-    })->create();
+    })
+    ->create();

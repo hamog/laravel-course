@@ -30,7 +30,6 @@ class CategoryUpdateRequest extends FormRequest
                 Rule::unique('categories')->ignore($this->route('category'))
             ],
             'status' => 'required|boolean',
-            'published_at' => 'required|date_format:Y/m/d'
         ];
     }
 }

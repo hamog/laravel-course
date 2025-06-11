@@ -20,8 +20,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     //dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     //categories
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index')->middleware('throttle:3,1');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware('throttle:3,1');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::patch('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');

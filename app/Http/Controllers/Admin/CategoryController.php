@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -44,6 +45,8 @@ class CategoryController extends Controller
 //        $category->status = $request->has('status');
 //        $category->save();
 
+        //Cache::forget('categories');
+
         return redirect()->route('admin.categories.index')
             ->with('success', 'دسته بندی با موفقیت ثبت شد.');
     }
@@ -78,6 +81,8 @@ class CategoryController extends Controller
             'status' => $request->has('status')
         ]);
 
+        //Cache::forget('categories');
+
         return redirect()->route('admin.categories.index')
             ->with('success', 'دسته بندی با موفقیت به روزرسانی شد.');
     }
@@ -86,6 +91,8 @@ class CategoryController extends Controller
     {
         $category = Category::query()->find($id);
         $category->delete();
+
+        //Cache::forget('categories');
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'دسته بندی با موفقیت حذف شد.');

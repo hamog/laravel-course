@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserLoggedIn;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,6 +25,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('active'))) {
             $request->session()->regenerate();
+
+            UserLoggedIn::dispatch($request->user());
 
             return redirect()->intended('admin');
         }
