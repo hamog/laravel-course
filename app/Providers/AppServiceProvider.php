@@ -9,6 +9,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\ServiceProvider;
@@ -46,5 +47,20 @@ class AppServiceProvider extends ServiceProvider
 //        Gate::define('update-post', function (User $user, Post $post) {
 //            return $user->id === $post->user_id;
 //        });
+
+        Response::macro('success', function (array $data, string $message = '') {
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+                'data' => $data
+            ], 200);
+        });
+        Response::macro('error', function (string $message, int $status = 400) {
+            return response()->json([
+                'success' => false,
+                'message' => $message,
+                'data' => []
+            ], $status);
+        });
     }
 }
