@@ -53,7 +53,7 @@ class Category extends Model
     {
         return Attribute::make(
             get: fn (?string $value) => $value  ?: 'test title',
-            set: fn (?string $value) => 'test'
+            set: fn (?string $value) => $value ?: 'test'
         );
     }
 }

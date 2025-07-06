@@ -37,7 +37,8 @@ class CategoryController extends Controller
 
         Category::query()->create([
             'name' => $request->input('name'),
-            'status' => $request->has('status')
+            'status' => $request->has('status'),
+            'title' => $request->input('title')
         ]);
 
 //        $category = new Category();
