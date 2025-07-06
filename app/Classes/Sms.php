@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use Exception;
+
 class Sms
 {
     protected $key;

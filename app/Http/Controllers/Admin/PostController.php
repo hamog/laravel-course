@@ -59,7 +59,7 @@ class PostController extends Controller
     {
         try {
 
-            $sms->send('0911258777', 'dashasdfashfasdhf');
+           // $sms->send('0911258777', 'dashasdfashfasdhf');
 
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $path = $request->file('image')->store('images', 'public');
